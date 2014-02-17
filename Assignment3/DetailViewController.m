@@ -29,9 +29,9 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+//}
 
 - (void)didReceiveMemoryWarning
 {

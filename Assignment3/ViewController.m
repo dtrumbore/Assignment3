@@ -48,13 +48,32 @@
 //Should remove all of the fruit in the cart.
 -(IBAction)removeAllFruitInCart:(id)sender
 {
+    [_cart removeAllObjects];
+    [_cartView reloadData];
+    
     
 }
 
 //should add 50 bananas to the cart and display them!
 -(IBAction)fillCartWithBananas:(id)sender
 {
-    
+    for (int i=0; i<50; i++) {
+        Fruit *tempFruit = [[Fruit alloc] initWithWithName:@"Bananas" andColor:@"Yellow" andShape:@"Curvy"];
+        tempFruit.url = @"http://en.m.wikipedia.org/wiki/Banana";
+        [_cart addObject:tempFruit];
+        
+    }
+    [_cartView reloadData];
+}
+
+-(IBAction)selectAll:(id)sender
+{
+
+}
+
+-(IBAction)selectNone:(id)sender
+{
+
 }
 
 - (void)didReceiveMemoryWarning

@@ -10,7 +10,7 @@
 
 @implementation Fruit
 
--initWithWithName:(NSString *) inName andColor:(NSString *) inColor andShape:(NSString *) inShape
+-initWithWithName:(NSString *) inName andColor:(NSString *) inColor andShape:(NSString *) inShape;
 {
     _name = inName;
     _shape = inShape;
@@ -21,6 +21,11 @@
 -(NSString *) description
 {
     return _name;
+}
+
+-(NSString *) url
+{
+    return _url;
 }
 
 

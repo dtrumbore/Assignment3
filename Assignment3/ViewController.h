@@ -18,6 +18,14 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *selectAll;
 
+@property (nonatomic, weak) IBOutlet UIButton *selectNone;
+
+@property (nonatomic, weak) IBOutlet UIButton *addBananas;
+
+@property (nonatomic, weak) IBOutlet UIButton *clearFruit;
+
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+
 -(IBAction)selectAllOrNone:(id)sender;
 
 @end
