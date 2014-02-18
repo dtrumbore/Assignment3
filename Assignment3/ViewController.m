@@ -16,6 +16,8 @@
 
 @implementation ViewController
 
+bool fruitBool = false;
+
 - (void)viewDidLoad
 {
     _allSelected = NO;
@@ -23,10 +25,11 @@
     
     for (int i=0; i<50; i++) {
         Fruit *tempFruit = [[Fruit alloc] initWithWithName:@"Bananas" andColor:@"Yellow" andShape:@"Curvy"];
-        tempFruit.url = @"http://en.m.wikipedia.org/wiki/Banana";
         [_cart addObject:tempFruit];
         
     }
+    
+    fruitBool = true;
     
     self.title = @"Banana Bar";
     [super viewDidLoad];
@@ -41,39 +44,71 @@
     } else {
         [_selectAll setTitle:@"Select All" forState:UIControlStateNormal];
     }
-    
-    [_cartView reloadData];
+    [_cartView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 //Should remove all of the fruit in the cart.
 -(IBAction)removeAllFruitInCart:(id)sender
 {
+    if (fruitBool == true)
     [_cart removeAllObjects];
-    [_cartView reloadData];
-    
     
 }
 
 //should add 50 bananas to the cart and display them!
 -(IBAction)fillCartWithBananas:(id)sender
 {
+    
+    if (fruitBool == false) {
     for (int i=0; i<50; i++) {
         Fruit *tempFruit = [[Fruit alloc] initWithWithName:@"Bananas" andColor:@"Yellow" andShape:@"Curvy"];
-        tempFruit.url = @"http://en.m.wikipedia.org/wiki/Banana";
         [_cart addObject:tempFruit];
-        
     }
-    [_cartView reloadData];
+    }
 }
 
 -(IBAction)selectAll:(id)sender
 {
-
+    UITableView * tableView;
+    NSIndexPath * indexPath;
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell"];
+    if (cell == Nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TableViewCell"];
+    }
+    if([_cart count] == 0){
+        cell.textLabel.text = @"No Fruit in Cart";
+        cell.detailTextLabel.text = @"";
+        
+    } else {
+        Fruit * tempFruit = [_cart objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = [tempFruit name];
+        cell.detailTextLabel.text = [tempFruit color];
+        
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
 }
 
 -(IBAction)selectNone:(id)sender
 {
-
+    UITableView * tableView;
+    NSIndexPath * indexPath;
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell"];
+    if (cell == Nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TableViewCell"];
+    }
+    if([_cart count] == 0){
+        cell.textLabel.text = @"No Fruit in Cart";
+        cell.detailTextLabel.text = @"";
+        
+    } else {
+        Fruit * tempFruit = [_cart objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = [tempFruit name];
+        cell.detailTextLabel.text = [tempFruit color];
+        
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +128,7 @@
     }
     return [_cart count];
 }
+
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return @"Fruit";
@@ -116,6 +152,7 @@
         
         if(_allSelected){
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+            
         } else {
             [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
@@ -128,6 +165,7 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://en.m.wikipedia.org/wiki/Banana"]];
 }
 
 @end

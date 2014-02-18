@@ -23,10 +23,4 @@
     return _name;
 }
 
--(NSString *) url
-{
-    return _url;
-}
-
-
 @end

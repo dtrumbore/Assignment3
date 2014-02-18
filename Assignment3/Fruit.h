@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * shape;
 @property (nonatomic, strong) NSString * color;
-@property (nonatomic, strong) NSString * url;
+@property (nonatomic, strong) NSURL * url;
 
 -initWithWithName:(NSString *) inName andColor:(NSString *) inColor andShape:(NSString *) inShape;
 
