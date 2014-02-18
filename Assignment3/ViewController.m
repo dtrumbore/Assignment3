@@ -45,6 +45,7 @@ bool isFruit = false;
         [_selectAll setTitle:@"Select All" forState:UIControlStateNormal];
     }
     [_cartView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+    [_cartView reloadData];
 }
 
 //Should remove all of the fruit in the cart.
@@ -54,6 +55,7 @@ bool isFruit = false;
         [_cart removeAllObjects];
         isFruit = NO;
     }
+    [_cartView reloadData];
 }
 
 //should add 50 bananas to the cart and display them!
@@ -66,16 +68,19 @@ bool isFruit = false;
     }
         isFruit = YES;
     }
+    [_cartView reloadData];
 }
 
 -(IBAction)selectAll:(id)sender
 {
     _allSelected = YES;
+    [_cartView reloadData];
 }
 
 -(IBAction)selectNone:(id)sender
 {
     _allSelected = NO;
+    [_cartView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,8 +129,6 @@ bool isFruit = false;
             [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
     }
-    
-    
     
     return cell;
 }
