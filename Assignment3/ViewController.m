@@ -16,7 +16,7 @@
 
 @implementation ViewController
 
-bool fruitBool = false;
+bool isFruit = false;
 
 - (void)viewDidLoad
 {
@@ -29,7 +29,7 @@ bool fruitBool = false;
         
     }
     
-    fruitBool = true;
+    isFruit = true;
     
     self.title = @"Banana Bar";
     [super viewDidLoad];
@@ -50,65 +50,32 @@ bool fruitBool = false;
 //Should remove all of the fruit in the cart.
 -(IBAction)removeAllFruitInCart:(id)sender
 {
-    if (fruitBool == true)
-    [_cart removeAllObjects];
-    
+    if (isFruit) {
+        [_cart removeAllObjects];
+        isFruit = NO;
+    }
 }
 
 //should add 50 bananas to the cart and display them!
 -(IBAction)fillCartWithBananas:(id)sender
 {
-    
-    if (fruitBool == false) {
+    if (!isFruit) {
     for (int i=0; i<50; i++) {
         Fruit *tempFruit = [[Fruit alloc] initWithWithName:@"Bananas" andColor:@"Yellow" andShape:@"Curvy"];
         [_cart addObject:tempFruit];
     }
+        isFruit = YES;
     }
 }
 
 -(IBAction)selectAll:(id)sender
 {
-    UITableView * tableView;
-    NSIndexPath * indexPath;
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell"];
-    if (cell == Nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TableViewCell"];
-    }
-    if([_cart count] == 0){
-        cell.textLabel.text = @"No Fruit in Cart";
-        cell.detailTextLabel.text = @"";
-        
-    } else {
-        Fruit * tempFruit = [_cart objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text = [tempFruit name];
-        cell.detailTextLabel.text = [tempFruit color];
-        
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    }
+    _allSelected = YES;
 }
 
 -(IBAction)selectNone:(id)sender
 {
-    UITableView * tableView;
-    NSIndexPath * indexPath;
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell"];
-    if (cell == Nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TableViewCell"];
-    }
-    if([_cart count] == 0){
-        cell.textLabel.text = @"No Fruit in Cart";
-        cell.detailTextLabel.text = @"";
-        
-    } else {
-        Fruit * tempFruit = [_cart objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text = [tempFruit name];
-        cell.detailTextLabel.text = [tempFruit color];
-        
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-    }
+    _allSelected = NO;
 }
 
 - (void)didReceiveMemoryWarning
